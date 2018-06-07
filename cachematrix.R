@@ -1,5 +1,5 @@
-## To create a matrix 
-## functions do
+## To create a special matrix that access the cache to read its inversed if 
+## it has been already calculated previously
 
 ## Function that defines accessors for a special matrix.  
 ## For the "set" function, it will check whether both matrices (x and y) are similar.
@@ -9,8 +9,7 @@ makeCacheMatrix <- function(x = matrix()) {
         inv_matrix <- NULL
         set <- function(y) {
                 if (!(is.matrix(x) && is.matrix(y) && dim(x) == dim(y) && all(x == y))){
-                        print(is.matrix(x) && is.matrix(y) && dim(x) == dim(y) && all(x == y))
-                        print(y)
+                        ## both matrices are different, so we can update x and inv_matrix
                         x <<- y
                         inv_matrix <<- NULL
                 }
