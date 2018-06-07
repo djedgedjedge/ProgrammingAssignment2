@@ -1,13 +1,19 @@
-## Put comments here that give an overall description of what your
+## To create a matrix 
 ## functions do
 
-## Write a short comment describing this function
+## Function that defines accessors for a special matrix.  
+## For the "set" function, it will check whether both matrices (x and y) are similar.
+## It will update x and its inversed only if the matrices are different
 
 makeCacheMatrix <- function(x = matrix()) {
         inv_matrix <- NULL
         set <- function(y) {
-                x <<- y
-                inv_matrix <<- NULL
+                if (!(is.matrix(x) && is.matrix(y) && dim(x) == dim(y) && all(x == y))){
+                        print(is.matrix(x) && is.matrix(y) && dim(x) == dim(y) && all(x == y))
+                        print(y)
+                        x <<- y
+                        inv_matrix <<- NULL
+                }
         }
         get <- function() x
         setInv <- function(inv_mat) inv_matrix <<- inv_mat
@@ -16,7 +22,9 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## Check whether the special matrix has an inversed matrix already computed
+## if yes, it will get directly the inversed matric from cache
+## if no, it will calculate the inversed matrix and put it in the cache
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
